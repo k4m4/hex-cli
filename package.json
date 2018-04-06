@@ -1,0 +1,43 @@
+{
+  "name": "hex-cli",
+  "version": "1.0.2",
+  "description": "Hex encode & decode a string, right from your terminal.",
+  "license": "MIT",
+  "repository": "k4m4/hex-cli",
+  "author": {
+    "name": "Nikolaos Kamarinakis",
+    "url": "https://nikolaskama.me",
+    "email": "nikolaskam@gmail.com"
+  },
+  "bin": {
+    "hex": "cli.js",
+    "hexencode": "cli.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "hex",
+    "hex-encoder",
+    "hex-encoding",
+    "hex-decoder",
+    "hex-decoding",
+    "encoder",
+    "decoder"
+  ],
+  "files": [
+    "cli.js"
+  ],
+  "devDependencies": {
+    "ava": "*",
+    "execa": "^0.10.0"
+  },
+  "dependencies": {
+    "get-stdin": "^6.0.0",
+    "log-symbols": "^2.2.0",
+    "meow": "^4.0.0"
+  }
+}
