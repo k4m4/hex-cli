@@ -32,7 +32,7 @@ function HexEncode (text) {
 }
 
 function HexEncodedRegex (ciphertext) {
-  const re = '(?:[0-9a-fA-F])+'
+  const re = '(?:(0x)?[0-9a-fA-F])+'
 	if ((ciphertext ? new RegExp('(?:^' + re + '$)') : new RegExp(re, 'g')).test(ciphertext)) return true;
 	else return false
 }
@@ -57,14 +57,14 @@ if (!input && process.stdin.isTTY) {
 }
 if (input) {
 	if (cli.flags["decode"]) {
-		display(HexDecode(input.trim()));
+		display(HexDecode(input.trim().replace('0x','')));
 	} else {
 		display(HexEncode(input.trim()));
 	}
 } else {
 	getStdin().then(stdin => {
 		if (cli.flags["decode"]) {
-			display(HexDecode(stdin.trim()));
+			display(HexDecode(stdin.trim().replace('0x','')));
 		} else {
 			display(HexEncode(stdin.trim()));
 		}
