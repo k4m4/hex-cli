@@ -32,7 +32,7 @@ function HexEncode (text) {
 }
 
 function HexEncodedRegex (ciphertext) {
-  const re = '(?:(0x)?[0-9a-fA-F])+'
+  const re = '(?:(0x)?[0-9a-fA-F]+)'
 	if ((ciphertext ? new RegExp('(?:^' + re + '$)') : new RegExp(re, 'g')).test(ciphertext)) return true;
 	else return false
 }
