@@ -44,7 +44,7 @@ function HexEncodedRegex (ciphertext) {
 }
 
 function HexDecode (text) {
-  if (HexEncodedRegex(text)) return new Buffer(text, 'hex').toString('utf8');
+  if (HexEncodedRegex(text)) return new Buffer.from(text, 'hex').toString('utf8');
   else return 'Ciphertext doesn\'t seem to be hex-encoded'
 }
 
