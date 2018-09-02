@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-'use strict';
-const meow       = require('meow');
-const getStdin   = require('get-stdin');
-const logSymbols = require('log-symbols');
+'use strict'
+const meow       = require('meow')
+const getStdin   = require('get-stdin')
+const logSymbols = require('log-symbols')
 
 const cli = meow(`
 	Usage
@@ -29,22 +29,22 @@ const cli = meow(`
 			default: false
 		}
 	}
-});
+})
 
-const input = cli.input[0];
+const input = cli.input[0]
 
 function HexEncode (text) {
-	return new Buffer.from(text).toString('hex');
+	return new Buffer.from(text).toString('hex')
 }
 
 function HexEncodedRegex (ciphertext) {
   const re = '(?:(0x)?[0-9a-fA-F]+)'
-	if ((ciphertext ? new RegExp('(?:^' + re + '$)') : new RegExp(re, 'g')).test(ciphertext)) return true;
+	if ((ciphertext ? new RegExp('(?:^' + re + '$)') : new RegExp(re, 'g')).test(ciphertext)) return true
 	else return false
 }
 
 function HexDecode (text) {
-  if (HexEncodedRegex(text)) return new Buffer.from(text, 'hex').toString('utf8');
+  if (HexEncodedRegex(text)) return new Buffer.from(text, 'hex').toString('utf8')
   else return 'Ciphertext doesn\'t seem to be hex-encoded'
 }
 
@@ -54,27 +54,27 @@ function display (plaintext) {
 		console.log(leading + plaintext)
 	} else {
 		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.error} `
-		console.log(leading + `Ciphertext doesn\'t seem to be hex-encoded`);
-		process.exit(1);
+		console.log(leading + `Ciphertext doesn\'t seem to be hex-encoded`)
+		process.exit(1)
 	}
 }
 
 if (!input && process.stdin.isTTY) {
-	console.log('Enter string to hex encode/decode');
-	process.exit(1);
+	console.log('Enter string to hex encode/decode')
+	process.exit(1)
 }
 if (input) {
 	if (cli.flags["decode"]) {
-		display(HexDecode(input.trim().replace('0x','')));
+		display(HexDecode(input.trim().replace('0x','')))
 	} else {
-		display(HexEncode(input.trim()));
+		display(HexEncode(input.trim()))
 	}
 } else {
 	getStdin().then(stdin => {
 		if (cli.flags["decode"]) {
-			display(HexDecode(stdin.trim().replace('0x','')));
+			display(HexDecode(stdin.trim().replace('0x','')))
 		} else {
-			display(HexEncode(stdin.trim()));
+			display(HexEncode(stdin.trim()))
 		}
 	})
 }
