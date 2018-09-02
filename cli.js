@@ -10,6 +10,7 @@ const cli = meow(`
 	  ~ ❯❯❯ echo [string] | hex
 	Options
 		-d, --decode  Decode hex encoded string
+		-p, --plain   Display output without log symbols
 	Examples
 	  ~ ❯❯❯ hex foobar
 	  ${logSymbols.success} 666f6f626172
@@ -20,6 +21,11 @@ const cli = meow(`
 		decode: {
 			type: 'boolean',
 			alias: 'd',
+			default: false
+		},
+		plain: {
+			type: 'boolean',
+			alias: 'p',
 			default: false
 		}
 	}
@@ -44,9 +50,11 @@ function HexDecode (text) {
 
 function display (plaintext) {
 	if (plaintext != 'Ciphertext doesn\'t seem to be hex-encoded') {
-		console.log(`${logSymbols.success} ` + plaintext)
+		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.success} `
+		console.log(leading + plaintext)
 	} else {
-		console.log(`${logSymbols.error} Ciphertext doesn\'t seem to be hex-encoded`);
+		const leading = (cli.flags["plain"]) ? `` : `${logSymbols.error} `
+		console.log(leading + `Ciphertext doesn\'t seem to be hex-encoded`);
 		process.exit(1);
 	}
 }

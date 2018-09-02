@@ -21,6 +21,7 @@
     ~ ❯❯❯ echo [string] | hex
   Options
         -d, --decode  Decode hex encoded string
+        -p, --plain   Display output without log symbols
   Examples
     ~ ❯❯❯ hex foobar
     ✔ 666f6f626172
